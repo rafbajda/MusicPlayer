@@ -1,0 +1,384 @@
+@import "settings";
+
+body{
+    background-color: rgb(16, 16, 26);
+}
+
+.WholePlayer{    
+    margin: auto;
+    margin-top: 50px;       
+    background-color: darken(#222, 5%);
+    width:480px;
+    border-style: double;
+    border-width: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 10%, 0.6);
+    .infoContainer{                
+        padding:10px;    
+        display:flex;    
+        img{
+            border:1px solid rgb(0, 0, 0);
+            box-shadow: $shadow;
+            max-height: 160px;
+            max-width: 150px;
+            border-radius: 10px;
+        }
+        .song-info{
+            padding:10px;
+            font-size: 30px;
+            font-weight: 800;
+            color: $gainsboro;          
+            .title{
+                font-size:25px;
+                color:darken($gainsboro,15%);   
+                font-weight:400;
+            }    
+        }
+        .time{
+            font-size: 20px;
+            font-weight:200;
+            color:darken($gainsboro,25%);
+        }
+        .volume{
+            margin-top:5px;
+            display:flex;
+            .glyphicon{      
+                width:30px;  
+                height:30px;     
+                margin-left: 5px;  
+                cursor: pointer;       
+            }                    
+            .volume-bar {
+                border:0.5px solid rgb(17, 17, 17);
+                box-shadow: $shadow;
+                margin-top:10px;
+                margin-left:10px;
+                width: 100px;
+                height:10px;
+                background-color: white;
+                display: flex;
+                align-items: center;
+                border-radius: 999999px;
+                cursor: pointer;      
+                        .v-fill{
+                            height: 10px;
+                            background-color: $blue;
+                            border-radius: 999999px;
+                            width:100%;
+                        }
+                        .v-handle{
+                            width: 10px;
+                            height: 10px;
+                            background-color: $blue;
+                            border-radius: 999999px;
+                            margin-left: -5px;
+                            transform: scale(2);
+                            transition: all 0.1s;
+                            &:hover {
+                                background-color: lighten($blue, 10%);
+                                transform: scale(2.5);
+                            }
+                        }            
+            }
+        }
+    }
+    .infoContainer-paused{
+        z-index:0;
+        position:relative;  
+        padding:10px;    
+        display:flex;   
+        cursor:default;
+        -moz-user-select: none;
+        user-select: none; 
+        .info-blocker{
+            transition-property:background-color;
+            transition-duration:0.2s;
+            -webkit-transition-duration:0.2s; 
+            position:absolute;            
+            margin-left:-10px;
+            margin-top:-10px;
+            background-color: darken(#222, 5%);            
+            width: 100%;            
+            height: 100%;
+            opacity: 0.95;   
+            pointer-events: none; 
+            .inscription{
+                position: absolute;
+                text-align:center;
+                font-size: 50px;
+                font-weight: 800;
+                color: white; 
+                width: 50%;
+                height: 40%;
+                top: 50%;
+                left: 50%;               
+                transform: translate(-50%, -50%);
+            }
+        } 
+        img{
+            border:1px solid rgb(0, 0, 0);
+            box-shadow: $shadow;
+            max-height: 160px;
+            max-width: 150px;
+            border-radius: 10px;
+        }
+        .song-info{
+            padding:10px;
+            display:block;
+            font-size: 30px;
+            font-weight: 800;
+            color: $gainsboro;          
+            .title{
+                font-size:25px;
+                color:darken($gainsboro,15%);   
+                font-weight:400;
+            }    
+        }
+        .time{
+            font-size: 20px;
+            font-weight:200;
+            color:darken($gainsboro,25%);
+        }
+        .volume{
+            z-index:-1;            
+            margin-top:5px;
+            display:flex;
+            .glyphicon{      
+                z-index: -1;
+                width:30px;  
+                height:30px;     
+                margin-left: 5px;  
+                cursor: pointer;
+            }          
+            .volume-bar {
+                z-index: -1;
+                border:0.5px solid rgb(17, 17, 17);
+                box-shadow: $shadow;
+                margin-top:10px;
+                margin-left:10px;
+                width: 100px;
+                height:10px;
+                background-color: white;
+                display: flex;
+                align-items: center;
+                border-radius: 999999px;
+                cursor: pointer;      
+                        .v-fill{
+                            z-index: -1;
+                            height: 10px;
+                            background-color: $blue;
+                            border-radius: 999999px;
+                            width:100%;
+                        }
+                        .v-handle{
+                            z-index: -1;
+                            width: 10px;
+                            height: 10px;
+                            background-color: $blue;
+                            border-radius: 999999px;
+                            margin-left: -5px;
+                            transform: scale(2);
+                        }            
+            }
+        }
+    }
+    .infoContainer-loading{            
+        z-index:0;
+        position:relative;  
+        padding:10px;    
+        display:flex;   
+        cursor:default;
+        -moz-user-select: none; 
+        user-select: none;
+        .info-blocker{
+            transition-property:background-color;
+            transition-duration:0.2s;
+            -webkit-transition-duration:0.2s; 
+            position:absolute;            
+            margin-left:-10px;
+            margin-top:-10px;
+            background-color: darken(#222, 5%);            
+            width: 100%;            
+            height: 100%;
+            opacity: 0.95;   
+            pointer-events: none;             
+            .inscription{
+                position: absolute;
+                text-align:center;
+                top: 15%;
+                left: 38%;               
+                transform: translate(-50%, -50%);
+                border: 16px solid $gainsboro;
+                border-top: 16px solid $blue;
+                border-radius: 50%;
+                width: 120px;
+                height: 120px;
+                animation: spin 2s linear infinite;
+            }            
+        } 
+        img{
+            border:1px solid rgb(0, 0, 0);
+            box-shadow: $shadow;
+            max-height: 160px;
+            max-width: 150px;
+            border-radius: 10px;
+        }
+        .song-info{
+            padding:10px;
+            display:block;
+            font-size: 30px;
+            font-weight: 800;
+            color: $gainsboro;          
+            .title{
+                font-size:25px;
+                color:darken($gainsboro,15%);   
+                font-weight:400;
+            }    
+        }
+        .time{
+            font-size: 20px;
+            font-weight:200;
+            color:darken($gainsboro,25%);
+        }
+        .volume{
+            z-index:-1;            
+            margin-top:5px;
+            display:flex;
+            .glyphicon{      
+                z-index: -1;
+                width:30px;  
+                height:30px;     
+                margin-left: 5px;  
+                cursor: pointer;
+            }          
+            .volume-bar {
+                z-index: -1;
+                border:0.5px solid rgb(17, 17, 17);
+                box-shadow: $shadow;
+                margin-top:10px;
+                margin-left:10px;
+                width: 100px;
+                height:10px;
+                background-color: white;
+                display: flex;
+                align-items: center;
+                border-radius: 999999px;
+                cursor: pointer;      
+                        .v-fill{
+                            z-index: -1;
+                            height: 10px;
+                            background-color: $blue;
+                            border-radius: 999999px;
+                            width:100%;                        
+                        }
+                        .v-handle{
+                            z-index: -1;
+                            width: 10px;
+                            height: 10px;
+                            background-color: $blue;
+                            border-radius: 999999px;
+                            margin-left: -5px;
+                            transform: scale(2);
+                        }            
+            }
+        }
+    }
+    .audio-player {
+        border-top-style:double;
+        border-top-width:5px;
+        padding:10px;
+        background-color: #222;
+        display: block;
+        align-items: center;
+        .buttons{
+            margin-top: -10px;
+            margin-bottom: 5px;
+            margin-left: 95px;
+            display:flex;
+            button.play{    
+                margin-right:3px;
+                margin-left:3px;            
+                width: 80px;
+                height: 80px;
+                box-shadow: $shadow;
+                background-color: $blue;
+                color: white;
+                font-size:30px;
+                border-radius: 999999px;        
+                cursor: pointer; 
+                .glyphicon{
+                    margin-right: -5px;
+                    margin-top:7px;
+                }
+                &:hover {
+                    background-color: lighten($blue, 10%);
+                }                                             
+            }
+            button.backward{
+                margin-left:-6px;
+                width: 80px;
+                height: 80px;
+                box-shadow: $shadow;
+                background-color: $blue;
+                color: white;
+                font-size:30px;
+                border-radius: 999999px;        
+                cursor: pointer;
+                .glyphicon{
+                    margin-left:-7px;
+                    margin-top:10px;
+                }
+                &:hover {
+                    background-color: lighten($blue, 10%);
+                } 
+            }
+            button.forward{
+                width: 80px;
+                height: 80px;
+                box-shadow: $shadow;
+                background-color: $blue;
+                color: white;
+                font-size:30px;
+                border-radius: 999999px;        
+                cursor: pointer;
+                .glyphicon{
+                    margin-right:-10px;
+                    margin-top:9px;
+                }
+                &:hover {
+                    background-color: lighten($blue, 10%);
+                } 
+            }
+        }  
+        .seek-bar {
+            border:1px solid rgb(17, 17, 17);
+            box-shadow: $shadow;
+            margin: 30px;
+            margin-left:18px;
+            width: 400px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            border-radius: 999999px;
+            cursor: pointer;                      
+            .fill{
+                height: 10px;
+                background-color: $blue;
+                border-radius: 999999px;
+            }
+            .handle{
+                width: 10px;
+                height: 10px;
+                background-color: $blue;
+                border-radius: 999999px;
+                margin-left: -8px;
+                transform: scale(2);
+                transition: all 0.1s;
+                &:hover {
+                    background-color: lighten($blue, 10%);
+                    transform: scale(3);
+                }
+            }
+        }
+    }
+}
